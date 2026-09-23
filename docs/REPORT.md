@@ -1,6 +1,6 @@
 # Weekly Increment Report
 
-## Week of: September 21-27, 2026
+## Week of: September 16-23, 2026
 
 ## What changed this week
 - Finalized the Back2me app proposal and revised the MVP features.
