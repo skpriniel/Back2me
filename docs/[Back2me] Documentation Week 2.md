@@ -56,14 +56,14 @@ The primary flow begins when the user signs in through the Login Screen. From th
 lib/
 - main.dart
 - Screens/
-  -login_screen.dart
-  -home_screen.dart
-  -item_details_screen.dart
-  -lending_records_screen.dart
-  -add_lending_record_screen.dart
--Models/
-  -item.dart
-  -lending_record.dart
+  - login_screen.dart
+  - home_screen.dart
+  - item_details_screen.dart
+  - lending_records_screen.dart
+  - add_lending_record_screen.dart
+- Models/
+  - item.dart
+  - lending_record.dart
 
 **Important Files**
 main.dart: Entry point of the Back2me Flutter application.
