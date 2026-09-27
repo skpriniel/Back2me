@@ -6,14 +6,14 @@
   New here? Read START-HERE.md first. Delete this comment when you are done.
 -->
 
-# App Name
+# Back2me
 
-> One sentence: what this app does, and who it is for.
+> Back2me is a personal belongings lending tracker that helps users record borrowed items, keep track of borrowers and return dates, and manage their lending history.
 
 **Live demo:** https://YOURUSERNAME.github.io/YOUR-REPO/ <!-- GitHub Pages is set up already; replace if you host elsewhere -->
 **Demo video:** `docs/demo.mp4` (link it here once it exists)
 **Course:** Applications Development and Emerging Technologies (6ADET), Holy Angel University
-**Author:** Your Name
+**Author:** Shannon Kyle A. Priniel
 
 This repository lives in the author's own GitHub account and is public on
 purpose. There is no `student.json` here and there should not be one: see
@@ -37,11 +37,15 @@ A repo without screenshots reads as abandoned, whatever the code says.
 
 ## What it does
 
-Three to five bullets. What can a user actually do?
+Back2me helps users organize their personal belongings and track items they lend to other people.
 
-- ...
-- ...
-- ...
+- Item Management: Add, edit, view, and delete personal items, including their category, description, condition, and availability.
+- Lending Records: Record which item was borrowed, who borrowed it, the borrow date, and the expected return date.
+- Return Tracking: Update lending records when an item is returned and keep the item's availability status updated.
+- History: View previous lending transactions, including the borrower, dates, and final status.
+- User Profile: View and edit personal profile information.
+
+Push notifications for upcoming return dates are planned as a stretch feature and are not part of the core MVP unless implemented.
 
 ## Built with
 
