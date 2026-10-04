@@ -4,6 +4,7 @@ import '../state/app_state_scope.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 import '../theme/app_text_styles.dart';
+import '../theme/app_text_styles.dart';
 import '../widgets/empty_state.dart';
 import '../widgets/lending_record_card.dart';
 import '../widgets/status_badge.dart';
@@ -55,23 +56,30 @@ class _LendingRecordsScreenState extends State<LendingRecordsScreen> {
             ],
           ),
           const SizedBox(height: AppSpacing.md),
-          Wrap(
-            spacing: AppSpacing.sm,
+          Row(
             children: [
-              ChoiceChip(
-                label: Text('All (${records.length})'),
-                selected: _filter == _HistoryFilter.all,
-                onSelected: (_) => setState(() => _filter = _HistoryFilter.all),
+              Expanded(
+                child: _HistoryFilterChip(
+                  label: 'All (${records.length})',
+                  selected: _filter == _HistoryFilter.all,
+                  onTap: () => setState(() => _filter = _HistoryFilter.all),
+                ),
               ),
-              ChoiceChip(
-                label: Text('Active (${records.where((r) => r.status == LendingStatus.active).length})'),
-                selected: _filter == _HistoryFilter.active,
-                onSelected: (_) => setState(() => _filter = _HistoryFilter.active),
+              const SizedBox(width: AppSpacing.sm),
+              Expanded(
+                child: _HistoryFilterChip(
+                  label: 'Active (${records.where((r) => r.status == LendingStatus.active).length})',
+                  selected: _filter == _HistoryFilter.active,
+                  onTap: () => setState(() => _filter = _HistoryFilter.active),
+                ),
               ),
-              ChoiceChip(
-                label: Text('Returned (${records.where((r) => r.status == LendingStatus.returned).length})'),
-                selected: _filter == _HistoryFilter.returned,
-                onSelected: (_) => setState(() => _filter = _HistoryFilter.returned),
+              const SizedBox(width: AppSpacing.sm),
+              Expanded(
+                child: _HistoryFilterChip(
+                  label: 'Returned (${records.where((r) => r.status == LendingStatus.returned).length})',
+                  selected: _filter == _HistoryFilter.returned,
+                  onTap: () => setState(() => _filter = _HistoryFilter.returned),
+                ),
               ),
             ],
           ),
@@ -97,6 +105,51 @@ class _LendingRecordsScreenState extends State<LendingRecordsScreen> {
               );
             }),
         ],
+      ),
+    );
+  }
+}
+
+/// Same compact, single-line pill used on Home, so filter controls look
+/// consistent across screens.
+class _HistoryFilterChip extends StatelessWidget {
+  final String label;
+  final bool selected;
+  final VoidCallback onTap;
+
+  const _HistoryFilterChip({required this.label, required this.selected, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(20),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+        decoration: BoxDecoration(
+          color: selected ? AppColors.accent : AppColors.surface,
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: selected ? AppColors.accent : AppColors.divider),
+        ),
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (selected) ...[
+                const Icon(Icons.check, size: 14, color: AppColors.onAccent),
+                const SizedBox(width: 4),
+              ],
+              Text(
+                label,
+                style: AppTextStyles.labelSmall.copyWith(
+                  color: selected ? AppColors.onAccent : AppColors.textDark,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

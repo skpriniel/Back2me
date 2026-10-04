@@ -149,23 +149,30 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             const SizedBox(height: AppSpacing.sm),
-            Wrap(
-              spacing: AppSpacing.sm,
+            Row(
               children: [
-                ChoiceChip(
-                  label: Text('All (${appState.items.length})'),
-                  selected: _filter == _ItemFilter.all,
-                  onSelected: (_) => setState(() => _filter = _ItemFilter.all),
+                Expanded(
+                  child: _FilterChip(
+                    label: 'All (${appState.items.length})',
+                    selected: _filter == _ItemFilter.all,
+                    onTap: () => setState(() => _filter = _ItemFilter.all),
+                  ),
                 ),
-                ChoiceChip(
-                  label: Text('Borrowed (${appState.items.where((i) => i.status == ItemStatus.borrowed).length})'),
-                  selected: _filter == _ItemFilter.borrowed,
-                  onSelected: (_) => setState(() => _filter = _ItemFilter.borrowed),
+                const SizedBox(width: AppSpacing.sm),
+                Expanded(
+                  child: _FilterChip(
+                    label: 'Borrowed (${appState.items.where((i) => i.status == ItemStatus.borrowed).length})',
+                    selected: _filter == _ItemFilter.borrowed,
+                    onTap: () => setState(() => _filter = _ItemFilter.borrowed),
+                  ),
                 ),
-                ChoiceChip(
-                  label: Text('Available (${appState.items.where((i) => i.status == ItemStatus.available).length})'),
-                  selected: _filter == _ItemFilter.available,
-                  onSelected: (_) => setState(() => _filter = _ItemFilter.available),
+                const SizedBox(width: AppSpacing.sm),
+                Expanded(
+                  child: _FilterChip(
+                    label: 'Available (${appState.items.where((i) => i.status == ItemStatus.available).length})',
+                    selected: _filter == _ItemFilter.available,
+                    onTap: () => setState(() => _filter = _ItemFilter.available),
+                  ),
                 ),
               ],
             ),
@@ -254,6 +261,52 @@ class _DueSoonBanner extends StatelessWidget {
             child: const Text('Nudge'),
           ),
         ],
+      ),
+    );
+  }
+}
+
+/// A compact filter pill. Unlike [ChoiceChip], its content shrinks to fit
+/// (via [FittedBox]) so three of these stay on a single line at any
+/// reasonable mobile width instead of wrapping to a second row.
+class _FilterChip extends StatelessWidget {
+  final String label;
+  final bool selected;
+  final VoidCallback onTap;
+
+  const _FilterChip({required this.label, required this.selected, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(20),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+        decoration: BoxDecoration(
+          color: selected ? AppColors.accent : AppColors.surface,
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: selected ? AppColors.accent : AppColors.divider),
+        ),
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (selected) ...[
+                const Icon(Icons.check, size: 14, color: AppColors.onAccent),
+                const SizedBox(width: 4),
+              ],
+              Text(
+                label,
+                style: AppTextStyles.labelSmall.copyWith(
+                  color: selected ? AppColors.onAccent : AppColors.textDark,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
