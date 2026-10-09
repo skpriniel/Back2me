@@ -1,4 +1,12 @@
-**Back2me**
+# Back2me
+
+**Live demo:** 
+
+**Demo video:** 
+
+**Course:** Applications Development and Emerging Technologies (6ADET), Holy Angel University
+
+**Author:** skpriniel
 
 ## 1. Overview
 
@@ -81,12 +89,14 @@ lending_record.dart: Defines the information stored for each lending transaction
 
 ## 6. Screenshots
 
-At least one screenshot per screen the app has.
+| Login | Home | Item Detail |
+| --- | --- | --- |
+| ![Login](docs/assets/screen-login.png.png) | ![Home](docs/assets/screen-home.png.png) | ![Item Detail](docs/assets/screen-item_detail.png.png) |
+| Add Lending Record | Lending Record | Profile | 
+| ![Add Lending Record](docs/assets/screen-add_lending_record.png.png) | ![Lending Record](docs/assets/screen-lending_record.png.png) | ![Profile](docs/assets/screen-profile.png.png) |
+| History |
+| ![History](docs/assets/screen-history.png.png) 
 
-<img width="435" height="866" alt="image" src="https://github.com/user-attachments/assets/a3f12772-9e11-4f64-9bf5-afc4736887a7" />
-<img width="455" height="855" alt="image" src="https://github.com/user-attachments/assets/36abfad9-c225-4045-baff-731a27ebb191" />
-
-Others are still in progress.
 
 ## 7. Known issues and next steps
 
@@ -102,32 +112,15 @@ Others are still in progress.
 - Verify web platform compatibility and run cross-browser testing.
 - Evaluate stretch goals (e.g., push notifications, filtering, photos, profile) once primary MVP milestones are met.
   
-## How it is graded
 
-See `rubrics.md` in this unit for the exact point breakdown. In short: your setup
-and run steps must actually work (that is the largest share), your feature and
-usage docs must match what the app really does, and screenshots plus clear
-writing carry the rest.
-
-## Security checklist (from week 2)
-
-From week 2 your documentation also includes a completed `SECURITY-CHECKLIST.md`
-in your workspace `project/` folder. Copy `security-checklist-template.md` from
-this unit and fill it in.
-
-Security Checklist link: https://github.com/HAU-6ADET/student-6ADET-2125-skpriniel/blob/main/content/finals/security-checklist.md
-
-Every row is answered Yes, No or N/A, with one line of evidence in your own
-words. "N/A" is a correct answer when it is true, and it needs its reason
-written next to it. Fill it in **before** you make your repository public, not
-after, because that is the point of it. It is worth 3 of the 15 points in
-week 2.
+## Security checklist
+see security checklist: [security-checklist.md](https://github.com/skpriniel/Back2me/blob/main/security-checklist.md)
 
 ## AI usage
+![Built with AI assistance](https://img.shields.io/badge/built%20with-AI%20assistance-0b5fff)
 
-Your repository must also carry an `AI-USAGE.md` and a credit line in the
-README. That file is graded separately, as your finals badge, and it is worth
-100 points; see the `finals-badge` unit for what goes in it. For your weekly
-Documentation Update all that is checked is that the file **exists and is
-current**, so start it in week 1 and keep it up as you go.
+The app was developed with Codex and Copilot for code suggestions, UI structure, debugging, API integration, and documentation, while the final implementation was reviewed and adjusted by the author. See [AI-USAGE.md](https://github.com/skpriniel/Back2me/blob/main/AI-USAGE.md). for more details.
+
+## License
+Copyright © 2026 skpriniel. [MIT License](https://github.com/skpriniel/Back2me/blob/main/LICENSE).
 
