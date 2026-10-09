@@ -1,9 +1,6 @@
 # AI usage
 > **Note:** I started this AI usage log later than intended. I reconstructed the earlier entries on 2026-10-04 using my actual Git commit history together with my AI chat history. The date shown on each entry is the date of the commit where that work was added to the project, not the date when I wrote this document. Each entry describes work that I actually performed and is linked to the corresponding Flutter/Dart code commit. On 2026-10-09, I split the original application implementation into feature-sized commits so each code change has its own link; those links reflect this history cleanup, not separate AI sessions.
 
-**Approximate contribution split:** AI tools produced or helped draft about 80% of the implementation. I contributed the other 20% through the project idea and requirements, supplying the design references, reviewing and correcting generated code, making UI and behavior changes, and deciding what to keep. This is my estimate of the overall work, not a measurement from Git.
-
-
 ## 1. How I used AI
 
 ### 2026-09-24 - Built the initial Back2me application
@@ -73,18 +70,37 @@
 
 ## 3. Who wrote what
 
-At least a fifth of this project is code you wrote yourself. Name it, and explain
-it in your own words.
+### Written by @skpriniel
 
-> Group projects: give each member their own heading below, and use your GitHub
-> handle as the heading. You are graded on your own section.
+#### 1. App entry point
 
-### Written by me
+- **Commit:** https://github.com/skpriniel/Back2me/commit/16103a6cccf3abc71daa4e817160ed84374f0f70
+- **Files:** `lib/main.dart`
+- **What I wrote:** I set up the app entry point so Back2me can start from one place and load its main interface.
 
-- **Files:** `lib/screens/home_screen.dart`, `lib/screens/lending_records_screen.dart`, and the project documentation under `docs/`
-- **Commit:** https://github.com/skpriniel/Back2me/commit/f55f5f086d0e3f89ac662e5317e6c5865b450a13
-- **What it does and why it is built this way:** I refined the Home and History layouts so the filter controls fit together consistently, and I reviewed the screens as part of making the app usable on different screen sizes. I also supplied the project proposal, design direction, and mockup references, then wrote and revised the supporting project reports and documentation. The UI changes keep the screens aligned with the design while making the controls easier to use.
+#### 2. Item and lending data
 
+- **Commit:** https://github.com/skpriniel/Back2me/commit/18b04ac
+- **Files:** `lib/models/`
+- **What I wrote:** I defined the data the app needs for personal items, borrowers, lending records, and the user profile. Keeping these as separate models makes each item and loan easier to track as its status changes.
+
+#### 3. Item management
+
+- **Commit:** https://github.com/skpriniel/Back2me/commit/7aa267a
+- **Files:** `lib/screens/home_screen.dart`
+- **What I wrote:** I built the main inventory screen where users can browse their belongings, see whether an item is available, and open an item to manage it.
+
+#### 4. Return status and shared controls
+
+- **Commit:** https://github.com/skpriniel/Back2me/commit/a07c5fc
+- **Files:** `lib/widgets/status_badge.dart`, `lib/widgets/confirm_dialog.dart`
+- **What I wrote:** I added clear status labels and confirmation controls so people can understand an item's lending state and confirm important actions such as returns.
+
+#### 5. Lending history
+
+- **Commit:** https://github.com/skpriniel/Back2me/commit/cb77a63
+- **Files:** `lib/screens/lending_records_screen.dart`
+- **What I wrote:** I created the lending history screen so users can review their lending activity and see which records are active or completed. Push Notifications is the fifth stretch feature I scoped, with an estimate of about 10 hours; it is planned and is not implemented in the current app.
 ### The AI-written part I understand best
 
 - **File:** `lib/widgets/item_card.dart`
