@@ -116,6 +116,10 @@ lending_record.dart: Defines the information stored for each lending transaction
 ## Security checklist
 see security checklist: [security-checklist.md](https://github.com/skpriniel/Back2me/blob/main/security-checklist.md)
 
+## Credits
+- Packages: see [pubspec.yaml](pubspec.yaml)
+- Fonts: lus Jakarta Sans, via Google Fonts.
+
 ## AI usage
 ![Built with AI assistance](https://img.shields.io/badge/built%20with-AI%20assistance-0b5fff)
 
