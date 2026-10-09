@@ -101,6 +101,7 @@
 - **Commit:** https://github.com/skpriniel/Back2me/commit/cb77a63
 - **Files:** `lib/screens/lending_records_screen.dart`
 - **What I wrote:** I created the lending history screen so users can review their lending activity and see which records are active or completed. Push Notifications is the fifth stretch feature I scoped, with an estimate of about 10 hours; it is planned and is not implemented in the current app.
+
 ### The AI-written part I understand best
 
 - **File:** `lib/widgets/item_card.dart`
