@@ -40,6 +40,19 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> saveProfile({required String fullName, required String emailAddress, required String phoneNumber}) async {
+    final current = profile;
+    final updated = UserProfile(
+      id: current?.id ?? 'local-profile',
+      fullName: fullName.trim(),
+      emailAddress: emailAddress.trim(),
+      phoneNumber: phoneNumber.trim(),
+    );
+    await _storage.userProfileBox.put(updated.id, updated);
+    profile = updated;
+    notifyListeners();
+  }
+
   // ---------------- Items ----------------
 
   Item addItem({

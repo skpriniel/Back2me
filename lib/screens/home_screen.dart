@@ -13,12 +13,14 @@ import '../widgets/status_badge.dart';
 import 'add_edit_lending_record_screen.dart';
 import 'item_details_screen.dart';
 import 'lending_records_screen.dart';
-import 'login_screen.dart';
+import 'profile_screen.dart';
 
 enum _ItemFilter { all, borrowed, available }
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final String initialEmail;
+
+  const HomeScreen({super.key, this.initialEmail = ''});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -35,36 +37,8 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
-  void _showProfileSheet(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      builder: (ctx) => SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(AppSpacing.lg),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Profile', style: AppTextStyles.titleMedium),
-              const SizedBox(height: AppSpacing.sm),
-              const Text('Demo user -- this local profile is not synced anywhere.'),
-              const SizedBox(height: AppSpacing.lg),
-              ListTile(
-                leading: const Icon(Icons.logout, color: AppColors.error),
-                title: const Text('Log out'),
-                onTap: () {
-                  Navigator.pop(ctx);
-                  Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (_) => const LoginScreen()),
-                    (route) => false,
-                  );
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+  void _openProfile() {
+    Navigator.of(context).push(MaterialPageRoute(builder: (_) => ProfileScreen(initialEmail: widget.initialEmail)));
   }
 
   @override
@@ -96,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         actions: [
-          IconButton(icon: const Icon(Icons.account_circle_outlined), onPressed: () => _showProfileSheet(context)),
+          IconButton(icon: const Icon(Icons.account_circle_outlined), tooltip: 'Profile', onPressed: _openProfile),
         ],
       ),
       body: RefreshIndicator(
@@ -213,7 +187,7 @@ class _HomeScreenState extends State<HomeScreen> {
           if (i == 1) {
             Navigator.of(context).push(MaterialPageRoute(builder: (_) => const LendingRecordsScreen()));
           } else if (i == 2) {
-            _showProfileSheet(context);
+            _openProfile();
           }
         },
         items: const [

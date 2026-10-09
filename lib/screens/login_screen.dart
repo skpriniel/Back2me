@@ -6,9 +6,9 @@ import '../widgets/app_button.dart';
 import '../widgets/app_text_field.dart';
 import 'home_screen.dart';
 
-/// Local/demo login only: validates a well-formed email and a password of
-/// at least 6 characters, then navigates to Home. No account is created,
-/// checked, or stored anywhere -- there is no Firebase, API, or backend.
+/// Local/demo login only: validates a Gmail address format and a password of
+/// at least 6 characters, then navigates to Home. It does not verify inbox
+/// ownership or create, check, or store an account.
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -18,7 +18,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _email = TextEditingController(text: 'you@gmail.com');
+  final _email = TextEditingController();
   final _password = TextEditingController();
   bool _obscure = true;
 
@@ -31,7 +31,44 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _login() {
     if (!_formKey.currentState!.validate()) return;
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => const HomeScreen()));
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => HomeScreen(initialEmail: _email.text.trim())));
+  }
+
+  String? _validateGmailAddress(String? value) {
+    final email = value?.trim() ?? '';
+    if (email.isEmpty) return 'Enter your Gmail address';
+
+    final atIndex = email.indexOf('@');
+    if (atIndex <= 0 || atIndex != email.lastIndexOf('@')) {
+      return 'Enter a valid Gmail address';
+    }
+
+    final username = email.substring(0, atIndex);
+    final domain = email.substring(atIndex + 1).toLowerCase();
+    if (domain != 'gmail.com') return 'Use an @gmail.com address';
+
+    final parts = username.split('+');
+    if (parts.length > 2) return 'Enter a valid Gmail address';
+
+    final accountName = parts.first;
+    final accountNamePattern = RegExp(r'^[a-zA-Z0-9.]+$');
+    if (accountName.length < 6 ||
+        accountName.length > 30 ||
+        !accountNamePattern.hasMatch(accountName) ||
+        accountName.startsWith('.') ||
+        accountName.endsWith('.') ||
+        accountName.contains('..')) {
+      return 'Enter a valid Gmail username';
+    }
+
+    if (parts.length == 2) {
+      final alias = parts[1];
+      if (alias.isEmpty || !RegExp(r'^[a-zA-Z0-9.-]+$').hasMatch(alias)) {
+        return 'Enter a valid Gmail address';
+      }
+    }
+
+    return null;
   }
 
   void _showDemoDialog(String title, String message) {
@@ -79,14 +116,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           AppTextField(
                             label: 'Email',
                             controller: _email,
-                            hint: 'you@gmail.com',
+                            hint: 'name@gmail.com',
                             icon: Icons.email_outlined,
                             keyboardType: TextInputType.emailAddress,
-                            validator: (v) {
-                              if (v == null || v.trim().isEmpty) return 'Enter your email';
-                              if (!v.contains('@') || !v.contains('.')) return 'Enter a valid email';
-                              return null;
-                            },
+                            validator: _validateGmailAddress,
                           ),
                           const SizedBox(height: AppSpacing.md),
                           Row(
@@ -123,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           PrimaryButton(label: 'Login', onPressed: _login),
                           const SizedBox(height: AppSpacing.sm),
                           Text(
-                            'Local demo login -- no real account is created or verified.',
+                            'Demo only: this checks Gmail address format, not account ownership.',
                             style: AppTextStyles.labelSmall.copyWith(color: AppColors.mutedText),
                             textAlign: TextAlign.center,
                           ),
@@ -139,7 +172,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           onTap: () => _showDemoDialog(
                             'Demo mode',
                             'Back2me does not use real accounts for this project, so there is nothing to sign up for. '
-                                'Use Login with any valid-looking email and a 6+ character password to continue.',
+                                'Use a valid-format @gmail.com address and a 6+ character password to continue. '
+                                    'This demo does not send a verification email.',
                           ),
                           child: Text(
                             'Create Account',
