@@ -118,7 +118,7 @@ see security checklist: [security-checklist.md](https://github.com/skpriniel/Bac
 
 ## Credits
 - Packages: see [pubspec.yaml](pubspec.yaml)
-- Fonts: lus Jakarta Sans, via Google Fonts.
+- Fonts: Plus Jakarta Sans, via Google Fonts.
 
 ## AI usage
 ![Built with AI assistance](https://img.shields.io/badge/built%20with-AI%20assistance-0b5fff)
