@@ -27,6 +27,7 @@ class AppState extends ChangeNotifier {
     borrowers
       ..clear()
       ..addAll(_storage.borrowersBox.values);
+    await _anonymizeSampleBorrowers();
     lendingRecords
       ..clear()
       ..addAll(_storage.lendingRecordsBox.values);
@@ -38,6 +39,27 @@ class AppState extends ChangeNotifier {
       await _storage.metaBox.put('sample_data_seeded', true);
     }
     notifyListeners();
+  }
+
+  Future<void> _anonymizeSampleBorrowers() async {
+    const sampleNames = {
+      'John Mallari': 'Sample Borrower 1',
+      'Bria Santos': 'Sample Borrower 2',
+      'Kitt Alvarez': 'Sample Borrower 3',
+      'Vonn Reyes': 'Sample Borrower 4',
+      'Miguel Santos': 'Sample Borrower 5',
+    };
+
+    for (final borrower in borrowers) {
+      final anonymizedName = sampleNames[borrower.name];
+      if (anonymizedName == null) continue;
+
+      borrower
+        ..name = anonymizedName
+        ..contactNumber = ''
+        ..email = null;
+      await _storage.borrowersBox.put(borrower.id, borrower);
+    }
   }
 
   Future<void> saveProfile({required String fullName, required String emailAddress, required String phoneNumber}) async {
@@ -262,7 +284,7 @@ class AppState extends ChangeNotifier {
 
   // ---------------- Sample data ----------------
 
-  /// Seeds a small, realistic dataset on first launch only. Kept separate
+  /// Seeds a small, anonymized dataset on first launch only. Kept separate
   /// from normal storage logic and gated by a "seeded" flag in the meta
   /// box so it never overwrites the user's real data.
   void seedSampleData() {
@@ -277,24 +299,24 @@ class AppState extends ChangeNotifier {
 
     createLendingRecord(
       itemId: laptop.id,
-      borrowerName: 'John Mallari',
-      contactNumber: '0921 456 7891',
+      borrowerName: 'Sample Borrower 1',
+      contactNumber: '',
       borrowDate: now.subtract(const Duration(days: 6)),
       expectedReturnDate: now.add(const Duration(days: 3)),
       note: 'Borrowing for university thesis presentation. Please return with charger.',
     );
     createLendingRecord(
       itemId: mouse.id,
-      borrowerName: 'Bria Santos',
-      contactNumber: '0917 555 2210',
+      borrowerName: 'Sample Borrower 2',
+      contactNumber: '',
       borrowDate: now.subtract(const Duration(days: 10)),
       expectedReturnDate: now.subtract(const Duration(days: 2)),
     );
 
     final r1 = createLendingRecord(
       itemId: camera.id,
-      borrowerName: 'Kitt Alvarez',
-      contactNumber: '0928 111 3344',
+      borrowerName: 'Sample Borrower 3',
+      contactNumber: '',
       borrowDate: now.subtract(const Duration(days: 20)),
       expectedReturnDate: now.subtract(const Duration(days: 13)),
     );
@@ -302,8 +324,8 @@ class AppState extends ChangeNotifier {
 
     final r2 = createLendingRecord(
       itemId: comb.id,
-      borrowerName: 'Vonn Reyes',
-      contactNumber: '0930 222 4455',
+      borrowerName: 'Sample Borrower 4',
+      contactNumber: '',
       borrowDate: now.subtract(const Duration(days: 30)),
       expectedReturnDate: now.subtract(const Duration(days: 23)),
     );
@@ -311,8 +333,8 @@ class AppState extends ChangeNotifier {
 
     final r3 = createLendingRecord(
       itemId: charger.id,
-      borrowerName: 'Miguel Santos',
-      contactNumber: '0925 333 6677',
+      borrowerName: 'Sample Borrower 5',
+      contactNumber: '',
       borrowDate: now.subtract(const Duration(days: 40)),
       expectedReturnDate: now.subtract(const Duration(days: 33)),
     );
@@ -320,8 +342,8 @@ class AppState extends ChangeNotifier {
 
     final r4 = createLendingRecord(
       itemId: powerbank.id,
-      borrowerName: 'John Mallari',
-      contactNumber: '0921 456 7891',
+      borrowerName: 'Sample Borrower 1',
+      contactNumber: '',
       borrowDate: now.subtract(const Duration(days: 50)),
       expectedReturnDate: now.subtract(const Duration(days: 43)),
     );
