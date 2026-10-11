@@ -1,38 +1,21 @@
 # Demo video
 
 **File:** https://drive.google.com/drive/folders/1zN66q8eM2hJrQAV0wYCz274x5d7DJW8U?usp=drive_link
-**Length:** aim for 3 to 5 minutes
-**Recorded on:** the device you used
+
+**Length:** 10 Minutes and 47 seconds
+
+**Recorded on:** Laptop
 
 ## What it shows
 
-A short list, in order, so a viewer can skip to what they need:
+- 0:00 Back2me introduction
+- 0:16 The problem Back2me solves and who it is for
+- 0:52 Four MVP features and app progress
+- 5:45 Technology used: Flutter, Dart, and Hive
+- 6:39 Challenge 1: Keeping item status and lending records consistent
+- 7:30 Challenge 2: Calculating overdue status
+- 7:59 Future improvements and current limitations
+- 8:31 How I used AI during development
+- 10:15 Closing and key takeaway
+- 10:47 End of presentation
 
-- 0:00 what the app is and who it is for
-- 0:20 ...
-- 1:10 ...
-
-Cover, in this order: the main user journey end to end, anything that only works
-on a real device (camera, GPS, sensors), and the thing you are proudest of.
-
-## Getting it into the repo
-
-GitHub **blocks any file over 100 MB** and warns over 50 MB, so compress before
-you commit:
-
-```bash
-ffmpeg -i raw.mp4 -vcodec libx264 -crf 28 -preset slow \
-       -vf scale=-2:720 -acodec aac -b:a 96k demo.mp4
-```
-
-Raise `-crf` (28 to 32) or drop to `-2:480` if it is still too large. If it still
-does not fit, attach it to a **GitHub Release** or upload it unlisted and link it
-here. Never commit the raw capture: git keeps it forever even after you delete
-it.
-
-## Before you record
-
-- Real data off the screen: no classmates' names, numbers, faces or messages.
-- Notifications off.
-- Sensible sample data, not "asdf".
-- One unbroken take per feature. Say what you are doing while you do it.
