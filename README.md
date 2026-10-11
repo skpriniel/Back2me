@@ -93,9 +93,9 @@ lending_record.dart: Defines the information stored for each lending transaction
 | --- | --- | --- |
 | ![Login](docs/assets/screen-login.png.png) | ![Home](docs/assets/screen-home.png.png) | ![Item Detail](docs/assets/screen-item_detail.png.png) |
 | Add Lending Record | Lending Record | Profile | 
-| ![Add Lending Record](docs/assets/screen-add_lending_record.png.png) | ![Lending Record](docs/assets/screen-lending_record.png.png) | ![Profile](docs/assets/screen-profile.png.png) |
+| ![Add Lending Record](docs/assets/screen-add_lending_record.png.png) | ![Lending Record](docs/assets/screen-lending_record.png.png) | ![Profile](docs/assets/screen-profile.png.png) 
 | History |
-| ![History](docs/assets/screen-history.png.png) 
+![History](docs/assets/screen-history.png.png) 
 
 
 ## 7. Known issues and next steps
